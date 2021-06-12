@@ -1,17 +1,14 @@
-from typing import List, Dict
-from datetime import date
+from fastapi import FastAPI
+from typing import Optional
 
-from pydantic import BaseModel
-
-# Declaras la variable como un str
-# y obtienes soporte del editor dentro de la función
-def main(user_id: str):
-    return user_id
+app = FastAPI()
 
 
-# Un modelo de Pydantic
-class User(BaseModel):
-    id: int
-    name: str
-    joined: date
-    
+@app.get("/")
+def read_root():
+ return {"Hello": "Micheli Anay"}
+
+
+@app.get("/items/{item_id}")
+def read_item(item_id: int, q: Optional[str] = None):
+ return {"item_id": item_id, "q": q}
